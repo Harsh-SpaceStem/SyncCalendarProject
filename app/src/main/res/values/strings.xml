@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TestProject</string>
+    <string name="today_date">01\nMon</string>
+
+    <string name="calender_api">AIzaSyDYKVzKpfvR0nY2z2lZaGVOqSFo94vM3OM</string>
+    <string name="add_event">Click To add Event</string>
+</resources>
