@@ -3,5 +3,7 @@
     <string name="today_date">01\nMon</string>
 
     <string name="calender_api">AIzaSyDYKVzKpfvR0nY2z2lZaGVOqSFo94vM3OM</string>
+    <string name="auth_id">573953469695-k6lul0ncvc510j18ppn2u6iiq1imi337.apps.googleusercontent.com</string>
     <string name="add_event">Click To add Event</string>
+    <string name="click_here">Click Here</string>
 </resources>

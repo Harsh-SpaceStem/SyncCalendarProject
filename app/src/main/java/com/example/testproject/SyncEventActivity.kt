@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.CalendarContract.Events
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -24,19 +25,20 @@ class SyncEventActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var eventAdapter: EventAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sync_event)
-
         val button: Button = findViewById(R.id.btn1)
         recyclerView = findViewById(R.id.rv_event)
 
         button.setOnClickListener {
             addEvent()
         }
-
-        listSelectedCalendars()
-        setupRecyclerview()
+        if (checkPermission()) {
+            listSelectedCalendars()
+            setupRecyclerview()
+        }
 
     }
 
@@ -92,10 +94,10 @@ class SyncEventActivity : AppCompatActivity() {
                         cursor.getString(6)
                     )
                 )
+                Log.e("TAG", "listSelectedCalendars: $events")
             } while (cursor.moveToNext())
             cursor.close()
         }
-        Log.e("TAG", "listSelectedCalendars: $events")
     }
 
     private fun addWithoutIntent() {
@@ -123,9 +125,7 @@ class SyncEventActivity : AppCompatActivity() {
         event.put(Events.DTSTART, startMillis)
         event.put(Events.DTEND, endMillis)
         event.put(Events.ALL_DAY, 0) // 0 for false, 1 for true
-
         event.put(Events.HAS_ALARM, 1) // 0 for false, 1 for true
-
 
         val timeZone = TimeZone.getDefault().id
         event.put(Events.EVENT_TIMEZONE, timeZone)
@@ -143,32 +143,39 @@ class SyncEventActivity : AppCompatActivity() {
     }
 
     private fun checkPermission(): Boolean {
-        if (ContextCompat.checkSelfPermission(
+        return when {
+            ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.WRITE_CALENDAR
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.WRITE_CALENDAR, Manifest.permission.READ_CALENDAR),
-                111
-            )
-            return false
+            ) != PackageManager.PERMISSION_GRANTED -> {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.WRITE_CALENDAR, Manifest.permission.READ_CALENDAR),
+                    111
+                )
+                false
+            }
+            shouldShowRequestPermissionRationale(Manifest.permission.WRITE_CALENDAR) -> {
+                Toast.makeText(this, "Permission Must require", Toast.LENGTH_LONG).show()
+                false
+            }
+            else -> {
+                true
+            }
         }
-        return true
     }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
-        permissions: Array<String?>,
+        permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 111) {
             if (grantResults.isNotEmpty()) {
-                addEvent()
+                listSelectedCalendars()
+                setupRecyclerview()
             }
         }
     }
-
 }

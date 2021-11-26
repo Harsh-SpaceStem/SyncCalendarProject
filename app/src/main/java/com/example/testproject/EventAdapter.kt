@@ -38,15 +38,15 @@ class EventAdapter(
         holder.id.text = taskList[position].id
         holder.title.text = taskList[position].title
         holder.description.text = taskList[position].description
-        if (taskList[position].location.isEmpty()) {
+        if (taskList[position].location!!.isEmpty()) {
             holder.location.text = "No Location Given to this Event"
         } else {
             holder.location.text = taskList[position].location
         }
         holder.allDay.isChecked = taskList[position].allDay == "1"
         holder.startTime.text =
-            getDate(taskList[position].dateStart.toLong())
-        holder.endTime.text = getDate(taskList[position].dateEnd.toLong())
+            taskList[position].dateStart?.let { getDate(it.toLong()) }
+        holder.endTime.text = taskList[position].dateEnd?.let { getDate(it.toLong()) }
     }
 
     override fun getItemCount(): Int {
