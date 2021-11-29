@@ -3,7 +3,10 @@
     <string name="today_date">01\nMon</string>
 
     <string name="calender_api">AIzaSyDYKVzKpfvR0nY2z2lZaGVOqSFo94vM3OM</string>
+    <string name="accessToken">Bearer ya29.a0ARrdaM-lSH6w6J9HR2k6pIntIvnTXo4w8xclVtE1AI8407Gyf_CnCREUtBl0wq15hNTmwAgNqcw0wDbeFSXMCW3wicVqnwRBIxE8z9wRd5GK1yz79uK8flNWM_a6U7Ykisn9t5Zc6YXWy-5tpAw3xeqcBItc</string>
     <string name="auth_id">573953469695-k6lul0ncvc510j18ppn2u6iiq1imi337.apps.googleusercontent.com</string>
     <string name="add_event">Click To add Event</string>
     <string name="click_here">Click Here</string>
+
+    <string name="creatorTestId">00c38io1ci0v07qffei5bvjh9g@group.calendar.google.com</string>
 </resources>

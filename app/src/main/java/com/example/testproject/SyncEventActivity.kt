@@ -120,7 +120,10 @@ class SyncEventActivity : AppCompatActivity() {
 
         event.put(Events.TITLE, "Demo Task")
         event.put(Events.DESCRIPTION, "Insert Event To Calendar")
-        event.put(Events.EVENT_LOCATION, "office")
+        event.put(
+            Events.EVENT_LOCATION,
+            "Mondeal Heights, A-Wing, A-105-107, 1st Floor, Sarkhej - Gandhinagar Hwy, Ahmedabad, Gujarat 380015"
+        )
 
         event.put(Events.DTSTART, startMillis)
         event.put(Events.DTEND, endMillis)
