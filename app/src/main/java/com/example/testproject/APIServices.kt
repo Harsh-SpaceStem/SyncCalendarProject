@@ -1,5 +1,6 @@
 package com.example.testproject
 
+import com.example.testproject.event_list.EventListResponse
 import com.example.testproject.events.EventRequest
 import com.example.testproject.events.EventResponse
 import retrofit2.Call
@@ -25,4 +26,9 @@ interface APIServices {
         @Body eventRequest: EventRequest
     ): Call<EventResponse>
 
+    @GET("calendars/{calendarId}/events")
+    fun getEventsList(
+        @Header("Authorization") accessToken: String,
+        @Path("calendarId") calId: String
+    ): Call<EventListResponse>
 }
